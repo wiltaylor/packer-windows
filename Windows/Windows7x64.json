@@ -1,0 +1,33 @@
+{
+	"builders": [
+	{
+		"type": "vmware-iso",
+		"headless": false,
+		"vm_name": "Windows7x64",
+		"vmdk_name": "Windows7x64",
+		"iso_url": "ISO/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
+		"iso_checksum": "6467c3875955df4514395f0afcaaa62a",
+		"iso_checksum_type": "md5",
+		"communicator": "winrm",
+		"winrm_username": "administrator",
+		"winrm_password": "P@ssw0rd01",
+		"shutdown_command": "shutdown -s -f -t 1",
+		"shutdown_timeout": "5m",
+		"guest_os_type": "windows7-64",
+		"disk_type_id": "0",
+		"disk_size": "1000000",
+		"Version": "12",
+		"floppy_files": [
+			"FloppyFiles/Windows7x64/*"
+		]
+	}	
+	],
+	"post-processors": [
+	{
+		"type": "vagrant",
+		"keep_input_artifact": true,
+		"output": "windows9x64-vmware.box",
+		"vagrantfile_template": "vagrantfile-windows.template"
+	}
+	]
+}
