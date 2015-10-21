@@ -87,27 +87,19 @@
 
     <FirstLogonCommands>
      <SynchronousCommand wcm:action="add">
-      <CommandLine>cmd /c copy a:\*.* %TEMP%</CommandLine>
+      <CommandLine>powershell.exe -executionpolicy bypass -file a:\vmware.ps1</CommandLine>
       <Order>1</Order>
      </SynchronousCommand>
      <SynchronousCommand wcm:action="add">
-      <CommandLine>%TEMP%\unattend.cmd</CommandLine>
+      <CommandLine>powershell.exe -executionpolicy bypass -file a:\misc.ps1</CommandLine>
       <Order>2</Order>
      </SynchronousCommand>
-     <SynchronousCommand wcm:action="add">
-      <CommandLine>powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c</CommandLine>
-      <Order>3</Order>
-     </SynchronousCommand>
-     <SynchronousCommand wcm:action="add">
-      <CommandLine>net accounts /MAXPWAGE:UNLIMITED</CommandLine>
-      <Order>4</Order>
-     </SynchronousCommand>
 	 <SynchronousCommand wcm:action="add">
-      <CommandLine>net user administrator /active:yes</CommandLine>
+      <CommandLine>powershell.exe -executionpolicy bypass -file a:\chef.ps1</CommandLine>
       <Order>5</Order>
      </SynchronousCommand>
 	 <SynchronousCommand wcm:action="add">
-      <CommandLine>%TEMP%\Enablewinrm.cmd</CommandLine>
+      <CommandLine>powershell.exe -executionpolicy bypass -file a:\enablewinrm.ps1</CommandLine>
       <Order>6</Order>
      </SynchronousCommand>
     </FirstLogonCommands>
@@ -120,14 +112,6 @@
   <settings pass="specialize">
    <component name="Microsoft-Windows-Security-Licensing-SLC-UX" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
     <SkipAutoActivation>true</SkipAutoActivation>
-   </component>
-   <component name="Microsoft-Windows-Deployment" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
-    <RunSynchronous>
-     <RunSynchronousCommand wcm:action="add">
-      <Order>1</Order>
-      <Path>reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\FirstNetwork" /v Category /t REG_DWORD /d 00000000 /f</Path>
-     </RunSynchronousCommand>
-    </RunSynchronous>
    </component>
   </settings>
 

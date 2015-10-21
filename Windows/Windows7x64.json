@@ -25,8 +25,8 @@
 	"post-processors": [
 	{
 		"type": "vagrant",
-		"keep_input_artifact": true,
-		"output": "windows9x64-vmware.box",
+		"keep_input_artifact": false,
+		"output": "windows7x64-vmware.box",
 		"vagrantfile_template": "vagrantfile-windows.template"
 	}
 	]

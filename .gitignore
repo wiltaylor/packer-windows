@@ -1,3 +1,4 @@
 Windows/ISO/
 Windows/output-vmware-iso/
 Windows/packer_cache/
+*.box

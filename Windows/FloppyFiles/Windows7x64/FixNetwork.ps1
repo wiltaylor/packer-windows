@@ -4,3 +4,4 @@ $connections = $networkListManager.GetNetworkConnections()
 
 # Set network location to Private for all networks 
 $connections | % { $_.GetNetwork().SetCategory(1) }
+
