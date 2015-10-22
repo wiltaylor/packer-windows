@@ -11,6 +11,7 @@
 		"communicator": "winrm",
 		"winrm_username": "administrator",
 		"winrm_password": "P@ssw0rd01",
+		"winrm_timeout": "4h",
 		"shutdown_command": "shutdown -s -f -t 1",
 		"shutdown_timeout": "5m",
 		"guest_os_type": "windows7-64",
@@ -18,9 +19,10 @@
 		"disk_size": "1000000",
 		"Version": "12",
 		"floppy_files": [
-			"FloppyFiles/Windows7x64/*"
+			"FloppyFiles/Windows7x64/*",
+			"scripts/PSWindowsUpdate/*"
 		]
-	}	
+	}
 	],
 	"post-processors": [
 	{

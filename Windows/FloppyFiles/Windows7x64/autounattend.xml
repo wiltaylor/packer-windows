@@ -7,7 +7,7 @@
     <UserData>
      <AcceptEula>true</AcceptEula>
      <!-- The following section only needed for Vista installs -->
-     
+
     </UserData>
 
     <DiskConfiguration>
@@ -16,8 +16,8 @@
       <DiskID>0</DiskID>
       <WillWipeDisk>true</WillWipeDisk>
       <CreatePartitions>
-       
-       
+
+
        <CreatePartition>
         <Order>1</Order>
         <Type>Primary</Type>
@@ -59,20 +59,19 @@
   </settings>
 
   <settings pass="oobeSystem">
-
    <component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
     <AutoLogon>
      <Password>
-      <Value>P@ssw0rd01</Value> 
+      <Value>P@ssw0rd01</Value>
       <PlainText>true</PlainText>
      </Password>
-     <Enabled>true</Enabled> 
-     <Username>administrator</Username> 
+     <Enabled>true</Enabled>
+     <Username>administrator</Username>
     </AutoLogon>
 
     <UserAccounts>
 		<AdministratorPassword>
-			<Value>P@ssw0rd01</Value> 
+			<Value>P@ssw0rd01</Value>
 			<PlainText>true</PlainText>
 		</AdministratorPassword>
     </UserAccounts>
@@ -87,31 +86,26 @@
 
     <FirstLogonCommands>
      <SynchronousCommand wcm:action="add">
-      <CommandLine>powershell.exe -executionpolicy bypass -file a:\vmware.ps1</CommandLine>
+      <CommandLine>cmd.exe /c powershell.exe -executionpolicy bypass -noprofile -noninteractive -file a:\build.ps1</CommandLine>
       <Order>1</Order>
-     </SynchronousCommand>
-     <SynchronousCommand wcm:action="add">
-      <CommandLine>powershell.exe -executionpolicy bypass -file a:\misc.ps1</CommandLine>
-      <Order>2</Order>
-     </SynchronousCommand>
-	 <SynchronousCommand wcm:action="add">
-      <CommandLine>powershell.exe -executionpolicy bypass -file a:\chef.ps1</CommandLine>
-      <Order>5</Order>
-     </SynchronousCommand>
-	 <SynchronousCommand wcm:action="add">
-      <CommandLine>powershell.exe -executionpolicy bypass -file a:\enablewinrm.ps1</CommandLine>
-      <Order>6</Order>
      </SynchronousCommand>
     </FirstLogonCommands>
 
     <TimeZone>AUS Eastern Standard Time</TimeZone>
    </component>
-
   </settings>
 
   <settings pass="specialize">
    <component name="Microsoft-Windows-Security-Licensing-SLC-UX" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
     <SkipAutoActivation>true</SkipAutoActivation>
+   </component>
+   <component name="Microsoft-Windows-Deployment" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
+    <RunSynchronous>
+     <RunSynchronousCommand wcm:action="add">
+      <Order>1</Order>
+      <Path>reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\FirstNetwork" /v Category /t REG_DWORD /d 00000000 /f</Path>
+     </RunSynchronousCommand>
+    </RunSynchronous>
    </component>
   </settings>
 
