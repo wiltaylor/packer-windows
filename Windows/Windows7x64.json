@@ -1,6 +1,7 @@
 {
 	"builders": [
 	{
+		"name": "Windows7x64",
 		"type": "vmware-iso",
 		"headless": false,
 		"vm_name": "Windows7x64",
@@ -25,11 +26,9 @@
 	}
 	],
 	"post-processors": [
-	{
-		"type": "vagrant",
-		"keep_input_artifact": false,
-		"output": "windows7x64-vmware.box",
-		"vagrantfile_template": "vagrantfile-windows.template"
-	}
+		{
+			"type": "compress",
+			"output": "Windows7x64.zip"
+		}
 	]
 }
