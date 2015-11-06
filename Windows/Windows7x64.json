@@ -24,11 +24,5 @@
 			"scripts/PSWindowsUpdate/*"
 		]
 	}
-	],
-	"post-processors": [
-		{
-			"type": "compress",
-			"output": "Windows7x64.zip"
-		}
 	]
 }
