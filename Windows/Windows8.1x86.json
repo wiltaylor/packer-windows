@@ -1,14 +1,14 @@
 {
 	"builders": [
 	{
-		"name": "Windows7x64",
-		"output_directory": "Windows7x64",
+		"name": "Windows8.1x86",
 		"type": "vmware-iso",
+		"output_directory": "Windows8.1x86",
 		"headless": false,
-		"vm_name": "Windows7x64",
-		"vmdk_name": "Windows7x64",
-		"iso_url": "ISO/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
-		"iso_checksum": "6467c3875955df4514395f0afcaaa62a",
+		"vm_name": "Windows8.1x86",
+		"vmdk_name": "Windows8.1x86",
+		"iso_url": "ISO/en_windows_8_1_enterprise_x86_dvd_2972289.iso",
+		"iso_checksum": "bf620a67b5dda1e18e9ce17d25711201",
 		"iso_checksum_type": "md5",
 		"communicator": "winrm",
 		"winrm_username": "administrator",
@@ -16,17 +16,22 @@
 		"winrm_timeout": "4h",
 		"shutdown_command": "shutdown -s -f -t 1",
 		"shutdown_timeout": "5m",
-		"guest_os_type": "windows7-64",
+		"guest_os_type": "windows8",
 		"disk_type_id": "0",
 		"disk_size": "1000000",
 		"Version": "12",
+		"vmx_data": {
+			"memsize": "2048",
+			"numvcpus": "2",
+			"scsi0.virtualDev": "lsisas1068"
+		},
 		"floppy_files": [
 			"scripts/Build.ps1",
 			"scripts/build01-vmware.ps1",
 			"scripts/build02-caffeine.ps1",
 			"scripts/build03-misc.cmd",
 			"scripts/build04-Enablewinrm.ps1",
-			"FloppyFiles/Windows7x64/autounattend.xml"
+			"FloppyFiles/Windows8.1x86/autounattend.xml"
 		]
 	}
 	]

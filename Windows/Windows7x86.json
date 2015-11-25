@@ -1,14 +1,14 @@
 {
 	"builders": [
 	{
-		"name": "Windows7x64",
-		"output_directory": "Windows7x64",
+		"name": "Windows7x86",
 		"type": "vmware-iso",
+		"output_directory": "Windows7x86",
 		"headless": false,
-		"vm_name": "Windows7x64",
-		"vmdk_name": "Windows7x64",
-		"iso_url": "ISO/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
-		"iso_checksum": "6467c3875955df4514395f0afcaaa62a",
+		"vm_name": "Windows7x86",
+		"vmdk_name": "Windows7x86",
+		"iso_url": "ISO/en_windows_7_enterprise_with_sp1_x86_dvd_u_677710.iso",
+		"iso_checksum": "d6044be7093fb2737db63d340a1b2a03",
 		"iso_checksum_type": "md5",
 		"communicator": "winrm",
 		"winrm_username": "administrator",
@@ -16,7 +16,7 @@
 		"winrm_timeout": "4h",
 		"shutdown_command": "shutdown -s -f -t 1",
 		"shutdown_timeout": "5m",
-		"guest_os_type": "windows7-64",
+		"guest_os_type": "windows7",
 		"disk_type_id": "0",
 		"disk_size": "1000000",
 		"Version": "12",
@@ -26,7 +26,7 @@
 			"scripts/build02-caffeine.ps1",
 			"scripts/build03-misc.cmd",
 			"scripts/build04-Enablewinrm.ps1",
-			"FloppyFiles/Windows7x64/autounattend.xml"
+			"FloppyFiles/Windows7x86/autounattend.xml"
 		]
 	}
 	]

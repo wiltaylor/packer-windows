@@ -3,3 +3,4 @@ Windows/output-vmware-iso/
 Windows/packer_cache/
 *.box
 Windows/output-*/*
+Windows/windows*/*
