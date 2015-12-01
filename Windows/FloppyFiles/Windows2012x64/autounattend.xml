@@ -4,14 +4,16 @@
   <settings pass="windowsPE">
 
    <component name="Microsoft-Windows-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
-    <UserData>
-     <AcceptEula>true</AcceptEula>
-     <ProductKey>
-       <WillShowUI>Never</WillShowUI>
-       <!-- Vista's 'default' product key. Gets overriden using slmgr.vbs. -->
-       <Key>YFKBB-PQJJV-G996G-VWGXY-2V3X8</Key>
-     </ProductKey>
-    </UserData>
+     <UserData>
+      <AcceptEula>true</AcceptEula>
+      <!-- The following section only needed for Vista installs -->
+      <ProductKey>
+        <WillShowUI>Never</WillShowUI>
+        <!-- Vista's 'default' product key. Gets overriden using slmgr.vbs. -->
+        <Key/>
+      </ProductKey>
+     </UserData>
+
 
     <DiskConfiguration>
      <WillShowUI>OnError</WillShowUI>
@@ -39,7 +41,7 @@
       <InstallFrom>
        <MetaData wcm:action="add">
         <Key>/IMAGE/NAME</Key>
-        <Value>Windows Vista ENTERPRISE</Value>
+        <Value>Windows Server 2012 SERVERDATACENTER</Value>
        </MetaData>
       </InstallFrom>
       <InstallTo>

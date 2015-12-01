@@ -1,14 +1,14 @@
 {
 	"builders": [
 	{
-		"name": "WindowsVistax64",
-		"output_directory": "WindowsVistax64",
+		"name": "Windows2012x64Core",
+		"output_directory": "Windows2012x64Core",
 		"type": "vmware-iso",
 		"headless": false,
-		"vm_name": "WindowsVistax64",
-		"vmdk_name": "WindowsVistax64",
-		"iso_url": "ISO/en_windows_vista_enterprise_sp2_x64_dvd_342332.iso",
-		"iso_checksum": "b7a3a65b6c45543e0b37c004997a7e25",
+		"vm_name": "Windows2012x64Core",
+		"vmdk_name": "Windows2012x64Core",
+		"iso_url": "ISO/en_windows_server_2012_x64_dvd_915478.iso",
+		"iso_checksum": "da91135483e24689bfdaf05d40301506",
 		"iso_checksum_type": "md5",
 		"communicator": "winrm",
 		"winrm_username": "administrator",
@@ -16,7 +16,7 @@
 		"winrm_timeout": "4h",
 		"shutdown_command": "shutdown -s -f -t 1",
 		"shutdown_timeout": "5m",
-		"guest_os_type": "winvista-64",
+		"guest_os_type": "windows8srv-64",
 		"disk_type_id": "0",
 		"disk_size": "1000000",
 		"Version": "12",
@@ -26,7 +26,7 @@
 			"scripts/build02-caffeine.ps1",
 			"scripts/build03-misc.cmd",
 			"scripts/build04-Enablewinrm.ps1",
-			"FloppyFiles/WindowsVistax64/autounattend.xml"
+			"FloppyFiles/Windows2012x64Core/autounattend.xml"
 		]
 	}
 	]
