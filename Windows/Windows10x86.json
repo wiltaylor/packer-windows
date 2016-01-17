@@ -1,37 +1,30 @@
 {
 	"builders": [
 	{
-		"name": "Windows10x86",
-		"type": "vmware-iso",
+		"name": "{{user `osnameshort`}}",
+		"output_directory": "{{user `osnameshort`}}",
+		"type": "vmware-vmx",
+		"source_path": "Blank/{{user `osnamelong`}}/{{user `osnamelong`}}.vmx",
 		"headless": false,
-		"vm_name": "Windows10x86",
-		"vmdk_name": "Windows10x86",
-		"iso_url": "ISO/en_windows_10_enterprise_version_1511_x86_dvd_7224912.iso",
-		"iso_checksum": "ac6df5aaa6b3755fc6e8e2cb7d5294dd",
-		"iso_checksum_type": "md5",
+		"vm_name": "{{user `osnameshort`}}",
 		"communicator": "winrm",
 		"winrm_username": "administrator",
 		"winrm_password": "P@ssw0rd01",
 		"winrm_timeout": "4h",
 		"shutdown_command": "shutdown -s -f -t 1",
-		"shutdown_timeout": "5m",
-		"guest_os_type": "windows9",
-		"disk_type_id": "0",
-		"disk_size": "1000000",
-		"Version": "12",
-		"vmx_data": {
-			"memsize": "2048",
-			"numvcpus": "2",
-			"scsi0.virtualDev": "lsisas1068"
-		},
-		"floppy_files": [
-			"scripts/Build.ps1",
-			"scripts/build01-vmware.ps1",
-			"scripts/build02-caffeine.ps1",
-			"scripts/build03-misc.cmd",
-			"scripts/build04-Enablewinrm.ps1",
-			"FloppyFiles/Windows10x86/autounattend.xml"
-		]
+		"shutdown_timeout": "5m"
 	}
-	]
+],
+"post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": true,
+      "output": "{{user `osnameshort`}}.box",
+      "vagrantfile_template": "vagrantfile-{{user `osnameshort`}}.template"
+    }
+  ],
+	"variables": {
+	 "osnameshort": "Windows10x86",
+	 "osnamelong": "Windows 10 x86"
+ }
 }

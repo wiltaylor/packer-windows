@@ -24,7 +24,7 @@
     }
   ],
 	"variables": {
-	 "osnameshort": "Windows7x86",
-	 "osnamelong": "Windows 7 x86"
+	 "osnameshort": "Windows2012Corex64",
+	 "osnamelong": "Windows 2012 Core x64"
  }
 }
