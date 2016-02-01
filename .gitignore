@@ -5,3 +5,4 @@ Windows/packer_cache/
 *.box
 Windows/output-*/*
 Windows/windows*/*
+Windows/tools/

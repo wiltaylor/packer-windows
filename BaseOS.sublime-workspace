@@ -1,0 +1,212 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tr",
+				"trusted"
+			],
+			[
+				"req",
+				"required"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Windows/scripts/openssh.ps1",
+			"settings":
+			{
+				"buffer_size": 4366,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/F/Virtual Machines/BaseOS/Windows/scripts/openssh.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/powershell.cmd",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/hibernation.cmd",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/rdp.cmd",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/vagrantuser.cmd",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/disableautoupdate.cmd",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x64/Autounattend.xml",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/Berksfile",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/recipes/powershell.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/Berksfile",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/metadata.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/recipes/default.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/providers/source.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/resources/source.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/resources/pkg.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/providers/pkg.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/providers/source",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/recipes/software.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/metadata.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/resources/package.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/providers/package.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/providers/package.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/resources/package.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/resources/oneget_package.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/DevLaptop/recipes/default.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/recipes/environment.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/attributes/default.rb",
+		"/F/Virtual Machines/Labs/devlaptop/Vagrantfile",
+		"/F/Virtual Machines/Labs/devlaptop/.gitignore",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/providers/oneget_package.rb",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/providers/oneget_package",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/resources/package",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/DevLaptop/Berksfile.lock",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/DevLaptop/Berksfile",
+		"/F/Virtual Machines/Labs/devlaptop/cookbooks/DevLaptop/metadata.rb"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Windows/scripts/openssh.ps1",
+					"settings":
+					{
+						"buffer_size": 4366,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1345,
+								1345
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 310.0,
+	"status_bar_visible": true
+}
