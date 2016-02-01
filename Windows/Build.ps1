@@ -1,4 +1,4 @@
-﻿Set-Location 'F:\Virtual Machines\BaseOS\Windows'
+﻿Set-Location $PSScriptRoot
 
 foreach($item in Get-ChildItem 'F:\Virtual Machines\BaseOS\Windows' -Filter *.json) {
     &packer build $item.Name
