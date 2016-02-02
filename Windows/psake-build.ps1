@@ -1,4 +1,4 @@
-task default -depends BuildAll
+task default -depends BuildAll, TestAll
 
 task BuildAll -depends BuildWindows7, BuildWindows8, BuildWindows81, BuildWindows10, BuildWindows2008R2, BuildWindows2012, BuildWindows2012R2
 
@@ -62,7 +62,7 @@ task BuildWindows2012R2Corex64 {
     &packer build -force .\Windows2012R2Corex64-base.json
 }
 
-task ImportBox -depends ImportBoxWindows7, ImportBoxWindows8
+task ImportBox -depends ImportBoxWindows7, ImportBoxWindows8, ImportBoxWindows81, ImportBoxWindows10, ImportBoxWindows2008R2, ImportBoxWindows2012, ImportBoxWindows2012R2
 task ImportBoxWindows7 -depends ImportBoxWindows7x64, ImportBoxWindows7x86
 task ImportBoxWindows8 -depends ImportBoxWindows8x64, ImportBoxWindows8x86
 task ImportBoxWindows81 -depends ImportBoxWindows81x64, ImportBoxWindows81x86

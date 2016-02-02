@@ -57,7 +57,7 @@ foreach($h in $hypervisors)
 
             It 'Can be removed' {
                 $ret  = &vagrant box remove --force --provider $boxtype "$osname-base"
-                $ret -like "*Error*" | should BeNullOrEmpty
+                $ret -like "*Error*" | foreach-object { if($_ -eq $false) { $null } else { $_} } | should BeNullOrEmpty #fixes weird bug where $false is passed instead of null causing test to fail.
                 $boxes = &vagrant box list        
                 $boxes -like "$osname-base*$h*"| should BeNullOrEmpty
             }
