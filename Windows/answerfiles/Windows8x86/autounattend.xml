@@ -3,11 +3,15 @@
 
   <settings pass="windowsPE">
 
-   <component name="Microsoft-Windows-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
+   <component name="Microsoft-Windows-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="x86">
     <UserData>
      <AcceptEula>true</AcceptEula>
      <!-- The following section only needed for Vista installs -->
-     
+     <ProductKey>
+       <WillShowUI>Never</WillShowUI>
+       <!-- Vista's 'default' product key. Gets overriden using slmgr.vbs. -->
+       <Key/>
+     </ProductKey>
     </UserData>
 
     <DiskConfiguration>
@@ -16,8 +20,8 @@
       <DiskID>0</DiskID>
       <WillWipeDisk>true</WillWipeDisk>
       <CreatePartitions>
-       
-       
+
+
        <CreatePartition>
         <Order>1</Order>
         <Type>Primary</Type>
@@ -36,7 +40,7 @@
       <InstallFrom>
        <MetaData wcm:action="add">
         <Key>/IMAGE/NAME</Key>
-        <Value>Windows 7 ENTERPRISE</Value>
+        <Value>Windows 8 Enterprise</Value>
        </MetaData>
       </InstallFrom>
       <InstallTo>
@@ -49,7 +53,7 @@
     </ImageInstall>
    </component>
 
-   <component name="Microsoft-Windows-International-Core-WinPE" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
+   <component name="Microsoft-Windows-International-Core-WinPE" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="x86">
     <InputLocale>en-US</InputLocale>
     <SystemLocale>en-US</SystemLocale>
     <UILanguage>en-US</UILanguage>
@@ -60,7 +64,7 @@
 
   <settings pass="oobeSystem">
 
-   <component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
+   <component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="x86">
     <AutoLogon>
      <Password>
       <Value>vagrant</Value> 
@@ -132,10 +136,10 @@
   </settings>
 
   <settings pass="specialize">
-   <component name="Microsoft-Windows-Security-Licensing-SLC-UX" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
+   <component name="Microsoft-Windows-Security-Licensing-SLC-UX" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="x86">
     <SkipAutoActivation>true</SkipAutoActivation>
    </component>
-   <component name="Microsoft-Windows-Deployment" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
+   <component name="Microsoft-Windows-Deployment" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="x86">
     <RunSynchronous>
      <RunSynchronousCommand wcm:action="add">
       <Order>1</Order>

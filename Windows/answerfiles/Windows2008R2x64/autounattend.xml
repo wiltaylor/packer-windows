@@ -7,7 +7,7 @@
     <UserData>
      <AcceptEula>true</AcceptEula>
      <!-- The following section only needed for Vista installs -->
-     
+
     </UserData>
 
     <DiskConfiguration>
@@ -16,8 +16,8 @@
       <DiskID>0</DiskID>
       <WillWipeDisk>true</WillWipeDisk>
       <CreatePartitions>
-       
-       
+
+
        <CreatePartition>
         <Order>1</Order>
         <Type>Primary</Type>
@@ -36,7 +36,7 @@
       <InstallFrom>
        <MetaData wcm:action="add">
         <Key>/IMAGE/NAME</Key>
-        <Value>Windows 7 ENTERPRISE</Value>
+        <Value>Windows Server 2008 R2 SERVERDATACENTER</Value>
        </MetaData>
       </InstallFrom>
       <InstallTo>
@@ -59,7 +59,6 @@
   </settings>
 
   <settings pass="oobeSystem">
-
    <component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" processorArchitecture="amd64">
     <AutoLogon>
      <Password>
@@ -128,7 +127,6 @@
 
     <TimeZone>AUS Eastern Standard Time</TimeZone>
    </component>
-
   </settings>
 
   <settings pass="specialize">

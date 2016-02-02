@@ -1,0 +1,102 @@
+{
+	"builders": [
+	{
+		"name": "{{user `osnameshort`}}-base-vmware",
+		"output_directory": "{{user `osnameshort`}}-base-vmware",
+		"type": "vmware-iso",
+		"iso_url": "iso/{{user `isoname`}}",
+		"iso_checksum": "{{user `isomd5`}}",
+		"iso_checksum_type": "md5",
+		"headless": false,
+		"vm_name": "{{user `osnameshort`}}-base-vmware",
+		"communicator": "ssh",
+		"shutdown_command": "C:/Windows/System32/sysprep/sysprep.exe /quiet /generalize /shutdown /oobe /unattend:c:/windows/temp/sysprep.xml",
+		"shutdown_timeout": "15m",
+		"ssh_username": "vagrant",
+		"ssh_password": "vagrant",
+		"ssh_wait_timeout": "8h",
+		"guest_os_type": "{{user `vmwareos`}}",
+      "floppy_files": [
+        "./answerfiles/{{user `osnameshort`}}/autounattend.xml",
+        "./answerfiles/{{user `osnameshort`}}/sysprep.xml",
+        "./scripts/disableautoupdate.cmd",
+        "./scripts/hibernation.cmd",
+        "./scripts/openssh.ps1",
+        "./scripts/powershell.cmd",
+        "./scripts/rdp.cmd",
+        "./scripts/vagrantuser.cmd",
+        "./scripts/vmtools.cmd",
+        "./tools/upgrader.exe",
+        "./scripts/fixnetwork.ps1"
+	  ],
+	  "vmx_data": {
+	  		"config.version": "8",
+			"virtualHW.version": "12",
+	        "RemoteDisplay.vnc.enabled": "false",
+	        "RemoteDisplay.vnc.port": "5900",
+	        "memsize": "2048",
+	        "numvcpus": "2",
+	        "scsi0.virtualDev": "lsisas1068"
+	      }
+	},
+	{
+		"name": "{{user `osnameshort`}}-base-vbox",
+		"output_directory": "{{user `osnameshort`}}-base-vbox",
+		"type": "virtualbox-iso",
+		"iso_url": "iso/{{user `isoname`}}",
+		"iso_checksum": "{{user `isomd5`}}",
+		"iso_checksum_type": "md5",
+		"headless": false,
+		"vm_name": "{{user `osnameshort`}}-base-vbox",
+		"communicator": "ssh",
+		"shutdown_command": "C:/Windows/System32/sysprep/sysprep.exe /quiet /generalize /shutdown /oobe /unattend:c:/windows/temp/sysprep.xml",
+		"shutdown_timeout": "15m",
+		"ssh_username": "vagrant",
+		"ssh_password": "vagrant",
+		"ssh_wait_timeout": "8h",
+		"guest_os_type": "{{user `vboxos`}}",
+      "floppy_files": [
+        "./answerfiles/{{user `osnameshort`}}/autounattend.xml",
+        "./answerfiles/{{user `osnameshort`}}/sysprep.xml",
+        "./scripts/disableautoupdate.cmd",
+        "./scripts/hibernation.cmd",
+        "./scripts/openssh.ps1",
+        "./scripts/powershell.cmd",
+        "./scripts/rdp.cmd",
+        "./scripts/vagrantuser.cmd",
+        "./scripts/fixnetwork.ps1",
+        "./scripts/vmtools.cmd"
+	  ],
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "2048"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ]
+      ]
+	}
+	],
+	"post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": true,
+      "output": "{{user `osnameshort`}}-base-{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-{{user `osnameshort`}}.template"
+    }
+    ],
+	"variables": {
+	 	"osnameshort": "Windows8.1x86",
+	 	"osnamelong": "Windows 8.1 x86",
+	 	"isoname": "en_windows_8_1_enterprise_x86_dvd_2972289.iso",
+	 	"isomd5": "bf620a67b5dda1e18e9ce17d25711201",
+	 	"vboxos": "Windows81",
+	 	"vmwareos": "windows8"
+ }
+}

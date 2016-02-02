@@ -9,3 +9,4 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdmi
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d 0 /f
 
 copy a:\sysprep.xml c:\windows\temp\sysprep.xml
+copy a:\fixnetwork.ps1 c:\windows\temp\fixnetwork.ps1

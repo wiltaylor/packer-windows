@@ -26,9 +26,8 @@
         "./scripts/rdp.cmd",
         "./scripts/vagrantuser.cmd",
         "./scripts/vmtools.cmd",
-        "./tools/upgrader.exe"
-
-
+        "./tools/upgrader.exe",
+        "./scripts/fixnetwork.ps1"
 	  ],
 	  "vmx_data": {
 	  		"config.version": "8",
@@ -64,7 +63,9 @@
         "./scripts/openssh.ps1",
         "./scripts/powershell.cmd",
         "./scripts/rdp.cmd",
-        "./scripts/vagrantuser.cmd"
+        "./scripts/vagrantuser.cmd",
+        "./scripts/fixnetwork.ps1",
+        "./scripts/vmtools.cmd"
 	  ],
       "vboxmanage": [
         [
@@ -91,11 +92,11 @@
     }
     ],
 	"variables": {
-	 	"osnameshort": "Windows7x64",
-	 	"osnamelong": "Windows 7 x64",
-	 	"isoname": "en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
-	 	"isomd5": "6467c3875955df4514395f0afcaaa62a",
-	 	"vboxos": "Windows7_64",
-	 	"vmwareos": "windows7-64"
+	 	"osnameshort": "Windows8x86",
+	 	"osnamelong": "Windows 8 x86",
+	 	"isoname": "en_windows_8_enterprise_x86_dvd_917587.iso",
+	 	"isomd5": "ad055cae50cef987586c51cc6cc3c62e",
+	 	"vboxos": "Windows8",
+	 	"vmwareos": "windows8"
  }
 }

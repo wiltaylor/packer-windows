@@ -7,7 +7,7 @@
     <UserData>
      <AcceptEula>true</AcceptEula>
      <!-- The following section only needed for Vista installs -->
-     
+
     </UserData>
 
     <DiskConfiguration>
@@ -16,8 +16,8 @@
       <DiskID>0</DiskID>
       <WillWipeDisk>true</WillWipeDisk>
       <CreatePartitions>
-       
-       
+
+
        <CreatePartition>
         <Order>1</Order>
         <Type>Primary</Type>
@@ -35,8 +35,8 @@
      <OSImage>
       <InstallFrom>
        <MetaData wcm:action="add">
-        <Key>/IMAGE/NAME</Key>
-        <Value>Windows 7 ENTERPRISE</Value>
+        <Key>/IMAGE/INDEX</Key>
+        <Value>1</Value>
        </MetaData>
       </InstallFrom>
       <InstallTo>
