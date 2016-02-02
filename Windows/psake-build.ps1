@@ -1,3 +1,131 @@
+properties {
+    $Windows10x64json = @{
+        OSNAME = "Windows10x64"
+        OSNAMELONG = "Windows 10 x64"
+        ISO = "en_windows_10_enterprise_version_1511_x64_dvd_7224901.iso"
+        ISOMD5 = "6d11fd855c9d5356f47c90f89ecd9283"
+        VBOXOS = "Windows10_64"
+        VMWAREOS = "windows9-64"
+    }
+
+    $Windows10x86json = @{
+        OSNAME = "Windows10x86"
+        OSNAMELONG = "Windows 10 x86"
+        ISO = "en_windows_10_enterprise_version_1511_x86_dvd_7224912.iso"
+        ISOMD5 = "ac6df5aaa6b3755fc6e8e2cb7d5294dd"
+        VBOXOS = "Windows10"
+        VMWAREOS = "windows9"
+    }
+
+    $Windows2008R2x64json = @{
+        OSNAME = "Windows2008R2x64"
+        OSNAMELONG = "Windows 2008R2 x64"
+        ISO = "en_windows_server_2008_r2_with_sp1_x64_dvd_617601.iso"
+        ISOMD5 = "8dcde01d0da526100869e2457aafb7ca"
+        VBOXOS = "Windows2008_64"
+        VMWAREOS = "windows7srv-64"
+    }
+
+    $Windows2012Corex64json = @{
+        OSNAME = "Windows2012Corex64"
+        OSNAMELONG = "Windows 2012Core x64"
+        ISO = "en_windows_server_2012_x64_dvd_915478.iso"
+        ISOMD5 = "da91135483e24689bfdaf05d40301506"
+        VBOXOS = "Windows2012_64"
+        VMWAREOS = "windows8srv-64"
+    }
+
+    $Windows2012R2Corex64json = @{
+        OSNAME = "Windows2012R2Corex64"
+        OSNAMELONG = "Windows 2012R2Core x64"
+        ISO = "en_windows_server_2012_r2_x64_dvd_2707946.iso"
+        ISOMD5 = "0e7c09aab20dec3cd7eab236dab90e78"
+        VBOXOS = "Windows2012_64"
+        VMWAREOS = "windows8srv-64"
+    }
+
+    $Windows2012R2Corex64json = @{
+        OSNAME = "Windows2012R2Corex64"
+        OSNAMELONG = "Windows 2012R2Core x64"
+        ISO = "en_windows_server_2012_r2_x64_dvd_2707946.iso"
+        ISOMD5 = "0e7c09aab20dec3cd7eab236dab90e78"
+        VBOXOS = "Windows2012_64"
+        VMWAREOS = "windows8srv-64"
+    }
+
+    $Windows2012R2x64json = @{
+        OSNAME = "Windows2012R2x64"
+        OSNAMELONG = "Windows 2012R2 x64"
+        ISO = "en_windows_server_2012_r2_x64_dvd_2707946.iso"
+        ISOMD5 = "0e7c09aab20dec3cd7eab236dab90e78"
+        VBOXOS = "Windows2012_64"
+        VMWAREOS = "windows8srv-64"
+    }
+
+    $Windows2012R2Corex64json = @{
+        OSNAME = "Windows2012R2x64"
+        OSNAMELONG = "Windows 2012R2 x64"
+        ISO = "en_windows_server_2012_r2_x64_dvd_2707946.iso"
+        ISOMD5 = "0e7c09aab20dec3cd7eab236dab90e78"
+        VBOXOS = "Windows2012_64"
+        VMWAREOS = "windows8srv-64"
+    }
+
+    $Windows7x64json = @{
+        OSNAME = "Windows7x64"
+        OSNAMELONG = "Windows 7 x64"
+        ISO = "en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso"
+        ISOMD5 = "6467c3875955df4514395f0afcaaa62a"
+        VBOXOS = "Windows7_64"
+        VMWAREOS = "windows7-64"
+    }
+
+    $Windows7x86json = @{
+        OSNAME = "Windows7x86"
+        OSNAMELONG = "Windows 7 x86"
+        ISO = "en_windows_7_enterprise_with_sp1_x86_dvd_u_677710.iso"
+        ISOMD5 = "d6044be7093fb2737db63d340a1b2a03"
+        VBOXOS = "Windows7"
+        VMWAREOS = "windows7"
+    }
+
+    $Windows81x64json = @{
+        OSNAME = "Windows8.1x64"
+        OSNAMELONG = "Windows 8.1 x64"
+        ISO = "en_windows_8_1_enterprise_x64_dvd_2971902.iso"
+        ISOMD5 = "8e194185fcce4ea737f274ee9005ddf0"
+        VBOXOS = "Windows81_64"
+        VMWAREOS = "windows8-64"
+    }
+
+    $Windows81x86json = @{
+        OSNAME = "Windows8.1x86"
+        OSNAMELONG = "Windows 8.1 x86"
+        ISO = "en_windows_8_1_enterprise_x86_dvd_2972289.iso"
+        ISOMD5 = "bf620a67b5dda1e18e9ce17d25711201"
+        VBOXOS = "Windows81"
+        VMWAREOS = "windows8"
+    }
+
+    $Windows8x64json = @{
+        OSNAME = "Windows8x64"
+        OSNAMELONG = "Windows 8 x64"
+        ISO = "en_windows_8_enterprise_x64_dvd_917522.iso"
+        ISOMD5 = "27aa354b8088527ffcd32007b51b25bf"
+        VBOXOS = "Windows8_64"
+        VMWAREOS = "windows8-64"
+    }
+
+    $Windows8x86json = @{
+        OSNAME = "Windows8x86"
+        OSNAMELONG = "Windows 8 x86"
+        ISO = "en_windows_8_enterprise_x86_dvd_917587.iso"
+        ISOMD5 = "ad055cae50cef987586c51cc6cc3c62e"
+        VBOXOS = "Windows8"
+        VMWAREOS = "windows8"
+    }
+}
+
 task default -depends BuildAll, TestAll
 
 task BuildAll -depends BuildWindows7, BuildWindows8, BuildWindows81, BuildWindows10, BuildWindows2008R2, BuildWindows2012, BuildWindows2012R2
