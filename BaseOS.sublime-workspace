@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"box",
+				"boxtype"
+			],
+			[
+				"pr",
+				"provider"
+			],
+			[
+				"no",
+				"NoNewWindow"
+			],
+			[
 				"tr",
 				"trusted"
 			],
@@ -16,10 +28,26 @@
 	"buffers":
 	[
 		{
-			"file": "Windows/scripts/openssh.ps1",
+			"file": "Windows/psake-build.ps1",
 			"settings":
 			{
-				"buffer_size": 4366,
+				"buffer_size": 9637,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Windows/tests/Windows7.tests.ps1",
+			"settings":
+			{
+				"buffer_size": 2316,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 184,
 				"line_ending": "Windows"
 			}
 		}
@@ -27,11 +55,15 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"install ",
+				"Package Control: Install Package"
+			]
 		],
-		"width": 0.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -48,13 +80,69 @@
 	},
 	"file_history":
 	[
-		"/F/Virtual Machines/BaseOS/Windows/scripts/openssh.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows7.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows8.1.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows8.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows2012R2.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows2012.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows2008R2.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows10.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/Windows2012R2x64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/psake-build.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/Windows2012R2Corex64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows8x64/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows2012R2x64-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows2012R2x64Core-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows2012x64Core-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows2012x64-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows2008R2x64-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows10x86-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows10x64-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows8.1x86-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows8.1x64-/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/Windows2012x64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows2012Corex64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows10x64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows2008R2x64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows10x86-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows10x64.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows8.1x86-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows8.1x64.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows8.1x64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2012Corex64.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2012x64.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2012R2x64.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2012R2Corex64.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows8x86.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows10x64.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows10x86.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2008R2x64.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows8.1x86.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows8.1x64.template",
+		"/F/Virtual Machines/BaseOS/Windows/Windows8x86-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows7x86.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows7x64.template",
+		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows8x64.template",
+		"/F/Virtual Machines/BaseOS/Windows/Windows7x86-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows8x64-base.json",
+		"/F/Virtual Machines/BaseOS/ReadMe.txt",
 		"/F/Virtual Machines/BaseOS/Windows/scripts/powershell.cmd",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/fixnetwork.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/openssh.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x64/Autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x64/sysprep.xml",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/vagrantuser.cmd",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x86/sysprep.xml",
+		"/F/Virtual Machines/BaseOS/Windows/Windows7x64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows7x64-basessh.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows7x64-base-vmware.json",
+		"/F/Virtual Machines/BaseOS/Windows/Windows7x64-base-vbox.json",
+		"/F/Virtual Machines/BaseOS/.gitignore",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/vmtools.cmd",
+		"/C/Users/Wil/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/F/Virtual Machines/BaseOS/Windows/scripts/hibernation.cmd",
 		"/F/Virtual Machines/BaseOS/Windows/scripts/rdp.cmd",
-		"/F/Virtual Machines/BaseOS/Windows/scripts/vagrantuser.cmd",
 		"/F/Virtual Machines/BaseOS/Windows/scripts/disableautoupdate.cmd",
-		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x64/Autounattend.xml",
 		"/F/Virtual Machines/Labs/devlaptop/cookbooks/oneget/Berksfile",
 		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/recipes/powershell.rb",
 		"/F/Virtual Machines/Labs/devlaptop/cookbooks/devlaptop/Berksfile",
@@ -100,6 +188,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"amd64"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -107,6 +196,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"x86"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -117,30 +207,84 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Windows/scripts/openssh.ps1",
+					"file": "Windows/psake-build.ps1",
 					"settings":
 					{
-						"buffer_size": 4366,
+						"buffer_size": 9637,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1345,
-								1345
+								7684,
+								7684
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/PowerShell/Support/PowershellSyntax.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2925.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Windows/tests/Windows7.tests.ps1",
+					"settings":
+					{
+						"buffer_size": 2316,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2013,
+								2013
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PowerShell/Support/PowershellSyntax.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 4.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": ".gitignore",
+					"settings":
+					{
+						"buffer_size": 184,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								184,
+								184
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -182,9 +326,13 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"replace":
 	{
-		"height": 0.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":

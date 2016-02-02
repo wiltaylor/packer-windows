@@ -32,7 +32,7 @@ foreach($h in $hypervisors)
         Describe "$longosname-Base-$h" {
 
             #removing existing box if set.
-            &vagrant box remove --force --provider $boxtype "$osname-base" 2>&1 | out-null 
+            try { &vagrant box remove --force --provider $boxtype "$osname-base" 2>&1 | out-null } catch {} 
             Remove-Item .\.vagrant -Force -Recurse -ErrorAction SilentlyContinue
             Remove-Item .\VagrantFile -ErrorAction SilentlyContinue
 
