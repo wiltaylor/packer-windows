@@ -200,3 +200,40 @@ task RemoveBoxWindows2012R2Corex64 {
     vagrant box remove --force --provider vmware_desktop Windows2012R2Corex64-base
     vagrant box remove --force --provider virtualbox Windows2012CoreR2x64-base
 } 
+
+task TestAll -depends TestWindows7, TestWindows8, TestWindows81, TestWindows10, TestWindows2008R2, TestWindows2012, TestWindows2012R2
+
+task TestWindows7 {
+    Remove-Item "$PSScriptRoot\Windows7TestResults.xml" -ErrorAction SilentlyContinue
+    Invoke-Pester -Script "$PSScriptRoot\tests\Windows7.tests.ps1" -OutputFile "$PSScriptRoot\Windows7TestResults.xml" -OutputFormat NUnitXml
+}
+
+task TestWindows8 {
+    Remove-Item "$PSScriptRoot\Windows8TestResults.xml" -ErrorAction SilentlyContinue
+    Invoke-Pester -Script "$PSScriptRoot\tests\Windows8.tests.ps1" -OutputFile "$PSScriptRoot\Windows8TestResults.xml" -OutputFormat NUnitXml
+}
+
+task TestWindows81 {
+    Remove-Item "$PSScriptRoot\Windows8.1TestResults.xml" -ErrorAction SilentlyContinue
+    Invoke-Pester -Script "$PSScriptRoot\tests\Windows8.1.tests.ps1" -OutputFile "$PSScriptRoot\Windows8.1TestResults.xml" -OutputFormat NUnitXml
+}
+
+task TestWindows10 {
+    Remove-Item "$PSScriptRoot\Windows10TestResults.xml" -ErrorAction SilentlyContinue
+    Invoke-Pester -Script "$PSScriptRoot\tests\Windows10.tests.ps1" -OutputFile "$PSScriptRoot\Windows10TestResults.xml" -OutputFormat NUnitXml
+}
+
+task TestWindows2008R2 {
+    Remove-Item "$PSScriptRoot\Windows2008R2TestResults.xml" -ErrorAction SilentlyContinue
+    Invoke-Pester -Script "$PSScriptRoot\tests\Windows2008R2.tests.ps1" -OutputFile "$PSScriptRoot\Windows2008R2TestResults.xml" -OutputFormat NUnitXml
+}
+
+task TestWindows2012 {
+    Remove-Item "$PSScriptRoot\Windows2012TestResults.xml" -ErrorAction SilentlyContinue
+    Invoke-Pester -Script "$PSScriptRoot\tests\Windows2012.tests.ps1" -OutputFile "$PSScriptRoot\Windows2012TestResults.xml" -OutputFormat NUnitXml
+}
+
+task TestWindows2012R2 {
+    Remove-Item "$PSScriptRoot\Windows2012R2TestResults.xml" -ErrorAction SilentlyContinue
+    Invoke-Pester -Script "$PSScriptRoot\tests\Windows2012R2.tests.ps1" -OutputFile "$PSScriptRoot\Windows2012R2TestResults.xml" -OutputFormat NUnitXml
+}

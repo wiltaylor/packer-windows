@@ -94,8 +94,8 @@
 	"variables": {
 	 	"osnameshort": "Windows2012R2Corex64",
 	 	"osnamelong": "Windows 2012R2Core x64",
-	 	"isoname": "en_windows_server_2012_x64_dvd_915478.iso",
-	 	"isomd5": "da91135483e24689bfdaf05d40301506",
+	 	"isoname": "en_windows_server_2012_r2_x64_dvd_2707946.iso",
+	 	"isomd5": "0e7c09aab20dec3cd7eab236dab90e78",
 	 	"vboxos": "Windows2012_64",
 	 	"vmwareos": "windows8srv-64"
  }

@@ -6,3 +6,5 @@ Windows/packer_cache/
 Windows/output-*/*
 Windows/windows*/*
 Windows/tools/
+Windows/tests/.vagrant
+Windows/tests/Vagrantfile
