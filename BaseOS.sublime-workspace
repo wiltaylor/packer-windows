@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Write",
+				"Write-LogMSG"
+			],
+			[
+				"osv",
+				"osvirtualbox"
+			],
+			[
 				"buildl",
 				"buildlist"
 			],
@@ -35,6 +43,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Windows/psake-build.ps1",
+			"settings":
+			{
+				"buffer_size": 9547,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -64,8 +80,20 @@
 	},
 	"file_history":
 	[
+		"/F/Virtual Machines/BaseOS/Windows/templates/packerjson-base",
 		"/F/Virtual Machines/BaseOS/Windows/psake-build.ps1",
+		"/F/Virtual Machines/BaseOS/.gitignore",
 		"/F/Virtual Machines/BaseOS/Windows/deploymentscript/Build.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/deploymentscript/Helper.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/templates/unattend-base",
+		"/F/Virtual Machines/BaseOS/Windows/templates/build-base",
+		"/F/Virtual Machines/BaseOS/Windows/templates/testscript-base",
+		"/F/Virtual Machines/BaseOS/Windows/floppy/Windows7x64-virtualbox/helper.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows10x64/autounattend.xml",
+		"/F/Virtual Machines/BaseOS/Windows/templates/sysprep-base",
+		"/F/Virtual Machines/BaseOS/Windows/Windows2012x64-base.json",
+		"/F/Virtual Machines/BaseOS/Windows/tests/Windows2008R2.tests.ps1",
+		"/F/Virtual Machines/BaseOS/Windows/scripts/vagrantuser.cmd",
 		"/F/Virtual Machines/BaseOS/Windows/scripts/openssh.ps1",
 		"/F/Virtual Machines/BaseOS/Windows/Windows8x86-base.json",
 		"/F/Virtual Machines/BaseOS/Windows/Windows8x64-base.json",
@@ -78,13 +106,11 @@
 		"/F/Virtual Machines/BaseOS/Windows/Windows10x86-base.json",
 		"/F/Virtual Machines/BaseOS/Windows/Windows2008R2x64-base.json",
 		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows10x64.template",
-		"/F/Virtual Machines/BaseOS/Windows/templates/packerjson-base",
 		"/F/Virtual Machines/BaseOS/Windows/Generators.ps1",
 		"/F/Virtual Machines/BaseOS/Windows/templates/vagrantfile-base",
 		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows10x86.template",
 		"/F/Virtual Machines/BaseOS/Windows/Windows10x64-base.json",
 		"/F/Virtual Machines/BaseOS/Windows/Windows2012R2x64-base.json",
-		"/F/Virtual Machines/BaseOS/Windows/Windows2012x64-base.json",
 		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2008R2x64.template",
 		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2012Corex64.template",
 		"/F/Virtual Machines/BaseOS/Windows/vagrantfile-Windows2012R2Corex64.template",
@@ -100,9 +126,7 @@
 		"/F/Virtual Machines/BaseOS/Windows/tests/Windows8.1.tests.ps1",
 		"/F/Virtual Machines/BaseOS/Windows/tests/Windows2012R2.tests.ps1",
 		"/F/Virtual Machines/BaseOS/Windows/tests/Windows2012.tests.ps1",
-		"/F/Virtual Machines/BaseOS/Windows/tests/Windows2008R2.tests.ps1",
 		"/F/Virtual Machines/BaseOS/Windows/tests/Windows10.tests.ps1",
-		"/F/Virtual Machines/BaseOS/.gitignore",
 		"/F/Virtual Machines/BaseOS/Windows/tests/Windows7.tests.ps1",
 		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows8x64/autounattend.xml",
 		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows2012R2x64-/autounattend.xml",
@@ -121,7 +145,6 @@
 		"/F/Virtual Machines/BaseOS/Windows/scripts/fixnetwork.ps1",
 		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x64/Autounattend.xml",
 		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x64/sysprep.xml",
-		"/F/Virtual Machines/BaseOS/Windows/scripts/vagrantuser.cmd",
 		"/F/Virtual Machines/BaseOS/Windows/answerfiles/Windows7x86/sysprep.xml",
 		"/F/Virtual Machines/BaseOS/Windows/Windows7x64-basessh.json",
 		"/F/Virtual Machines/BaseOS/Windows/Windows7x64-base-vmware.json",
@@ -162,7 +185,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -178,16 +201,29 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Write-LogMSG",
+			"Write-LogMSG '",
+			"-Args",
+			"Install-WebPackage",
+			"Invoke-WebPackage",
+			"Write-Log",
+			"amd64",
 			"\"headless\": true,",
 			"\"headless\": false,",
 			"amd64"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"Write-LogMSG Info '",
+			"-ArgumentList",
+			"Invoke-Exe",
+			"Install-WebPackage",
+			"Write-LogMSG",
+			"<!ARCH!>",
 			"\"headless\": false,",
 			"\"headless\": true,",
 			"x86"
@@ -201,8 +237,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Windows/psake-build.ps1",
+					"settings":
+					{
+						"buffer_size": 9547,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5436,
+								5436
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PowerShell/Support/PowershellSyntax.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2808.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

@@ -168,7 +168,7 @@ $oslist = @(
 $providers = @(
     @{
         Name = "vmware"
-        ProviderName = "vmware_desktop"
+        ProviderName = "vmware_workstation"
     },
     @{
         Name = "virtualbox"
@@ -191,6 +191,9 @@ foreach ($os in $oslist) {
 
     $osvmware.add('HYPERVISOR', 'vmware')
     $osvirtualbox.add('HYPERVISOR', 'virtualbox')
+
+    $osvmware.add('PROVIDER', 'vmware_desktop')
+    $osvirtualbox.add('PROVIDER', 'virtualbox')
 
     task "Generator$($os.OSNAME)" -depends "Clean$($os.OSNAME)"{
         .\Generators.ps1 -Generator "packerjson-base" -File ".\$($os.OSNAME)-base.json" -Properties $os
@@ -222,9 +225,11 @@ foreach ($os in $oslist) {
     task "Clean$($os.OSNAME)" {
         Remove-Item "$PSScriptRoot\$($os.OSNAME)-base.json" -Force -ErrorAction SilentlyContinue
         Remove-Item "$PSScriptRoot\vagrantfile-$($os.OSNAME).template" -Force -ErrorAction SilentlyContinue
-        Remove-Item "$PSScriptRoot\$($os.OSNAME)-base-*.box -Force" -ErrorAction SilentlyContinue
-        Remove-Item "$PSScriptRoot\$($os.OSNAME)-base-*" -Recurse -Force -ErrorAction SilentlyContinue
-        Remove-Item "$PSScriptRoot\tests\$($os.OSNAME).tests.ps1" -ErrorAction SilentlyContinue
+        Remove-Item "$PSScriptRoot\$($os.OSNAME)-base-*\" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item "$PSScriptRoot\tests\$($os.OSNAME)-vmware.tests.ps1" -ErrorAction SilentlyContinue
+        Remove-Item "$PSScriptRoot\tests\$($os.OSNAME)-virtualbox.tests.ps1" -ErrorAction SilentlyContinue
+        Remove-Item "$PSScriptRoot\$($os.OSNAME)-vmware-testresults.xml" -ErrorAction SilentlyContinue
+        Remove-Item "$PSScriptRoot\$($os.OSNAME)-virtualbox-testresults.xml" -ErrorAction SilentlyContinue
         Remove-Item "$PSScriptRoot\floppy\$($os.OSNAME)*" -Recurse -Force -ErrorAction SilentlyContinue
     }.GetNewClosure()
 
@@ -243,8 +248,10 @@ foreach ($os in $oslist) {
     }.GetNewClosure()
 
     task "Test$($os.OSNAME)" {
-        Remove-Item "$PSScriptRoot\$($os.OSNAME)TestResults.xml" -ErrorAction SilentlyContinue
-        Invoke-Pester -Script "$PSScriptRoot\tests\$($os.OSNAME).tests.ps1" -OutputFile "$PSScriptRoot\$($os.OSNAME)TestResults.xml" -OutputFormat NUnitXml
+        Remove-Item "$PSScriptRoot\$($os.OSNAME)-Vmware-TestResults.xml" -ErrorAction SilentlyContinue
+        Remove-Item "$PSScriptRoot\$($os.OSNAME)-VirtualBox-TestResults.xml" -ErrorAction SilentlyContinue
+        Invoke-Pester -Script "$PSScriptRoot\tests\$($os.OSNAME)-vmware.tests.ps1" -OutputFile "$PSScriptRoot\$($os.OSNAME)-Vmware-TestResults.xml" -OutputFormat NUnitXml
+        Invoke-Pester -Script "$PSScriptRoot\tests\$($os.OSNAME)-VirtualBox.tests.ps1" -OutputFile "$PSScriptRoot\$($os.OSNAME)-VirtualBox-TestResults.xml" -OutputFormat NUnitXml
     }.GetNewClosure()
 
     $generatorlist += "Generator$($os.OSNAME)"

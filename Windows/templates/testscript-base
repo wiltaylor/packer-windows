@@ -1,52 +1,56 @@
 Set-Location $PSScriptRoot
 
-foreach($os in $OSList)
-{
+$osname = '<!OSNAME!>'
+$longosname = '<!OSNAMELONG!>'
+$provider = '<!PROVIDER!>'
+$hypervisor = '<!HYPERVISOR!>'
 
-    $osname = '<!OSNAME!>'
-    $longosname = '<!OSNAMELONG!>'
-    $provider = '<!PROVIDER!>'
-    $hypervisor = '<!HYPERVISOR!>'
+$boxtype = $hypervisor
+if($boxtype -eq 'vmware') { $boxtype = 'vmware_desktop'}
 
-    Describe "$longosname-Base-$hypervisor" {
+Describe "$longosname-Base-$hypervisor" {
 
-        #removing existing box if set.
-        try { &vagrant box remove --force --provider $boxtype "$osname-base" 2>&1 | out-null } catch {}
-        Remove-Item .\.vagrant -Force -Recurse -ErrorAction SilentlyContinue
-        Remove-Item .\VagrantFile -ErrorAction SilentlyContinue
+    #removing existing box if set.
+    Remove-Item .\.vagrant -Force -Recurse -ErrorAction SilentlyContinue
+    Remove-Item .\VagrantFile -ErrorAction SilentlyContinue
 
-        It 'Can be imported' {
-            &vagrant box add --name "$osname-base" "../$osname-base-$hypervisor.box"
-            $boxes = &vagrant box list
-            $boxes -like "$osname-base*$hypervisor*"| should not BeNullOrEmpty
-        }
-
-        It 'Can be brought up' {
-            &vagrant init "$osname-base"
-            $ret = &vagrant up --provider $provider
-            $ret -like "Error" | should BeNullOrEmpty
-
-        }
-
-        It 'Can run powershell commands' {
-            $ret = &vagrant powershell --command "Get-Host"
-
-            $ret -like "*ConsoleHost*" | should not BeNullOrEmpty
-        }
-
-        It 'Can be destroryed' {
-            $ret = &vagrant destroy -f
-            $ret -like "*Error*" | should BeNullOrEmpty
-        }
-
-        It 'Can be removed' {
-            $ret  = &vagrant box remove --force --provider $boxtype "$osname-base"
-            $ret -like "*Error*" | foreach-object { if($_ -eq $false) { $null } else { $_} } | should BeNullOrEmpty #fixes weird bug where $false is passed instead of null causing test to fail.
-            $boxes = &vagrant box list        
-            $boxes -like "$osname-base*$hypervisor*"| should BeNullOrEmpty
-        }
-
-        Remove-Item .\.vagrant -Force -Recurse -ErrorAction SilentlyContinue
-        Remove-Item .\VagrantFile -ErrorAction SilentlyContinue
+    It 'Can be imported' {
+        &vagrant box add -f --name "$osname-base" "../$osname-base-$hypervisor.box"
+        $boxes = &vagrant box list
+        $boxes -like "$osname-base*$hypervisor*" | foreach-object { if($_ -eq $false) { $null } else { $_} } | should not BeNullOrEmpty
     }
+
+    It 'Can be brought up' {
+        &vagrant init "$osname-base"
+        $ret = &vagrant up --provider $provider
+        $ret -like "Error" | foreach-object { if($_ -eq $false) { $null } else { $_} } | should BeNullOrEmpty
+        $ret | write-output 
+
+    }
+
+    It 'Can run powershell commands' {
+        $ret = &vagrant powershell --command "Get-Host"
+
+        $ret -like "*ConsoleHost*" | foreach-object { if($_ -eq $false) { $null } else { $_} } | should not BeNullOrEmpty
+
+        $ret | write-output
+    }
+
+    It 'Can be destroryed' {
+        $ret = &vagrant destroy -f
+        $ret -like "*Error*" | foreach-object { if($_ -eq $false) { $null } else { $_} } | should BeNullOrEmpty
+        $ret | write-output
+    }
+
+    It 'Can be removed' {
+        $ret  = &vagrant box remove --force --provider $boxtype "$osname-base"
+        $ret -like "*Error*" | foreach-object { if($_ -eq $false) { $null } else { $_} } | should BeNullOrEmpty #fixes weird bug where $false is passed instead of null causing test to fail.
+        $ret | write-output
+        $boxes = &vagrant box list        
+        $boxes -like "$osname-base*$hypervisor*"| should BeNullOrEmpty
+    }
+
+    Remove-Item .\.vagrant -Force -Recurse -ErrorAction SilentlyContinue
+    Remove-Item .\VagrantFile -ErrorAction SilentlyContinue
 }
+
