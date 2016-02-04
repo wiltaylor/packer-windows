@@ -7,8 +7,6 @@ $is_64bit = [IntPtr]::size -eq 8
 
 # setup openssh
 $ssh_download_url = "http://www.mls-software.com/files/setupssh-7.1p1-1.exe"
-$git_url = "https://github.com/git-for-windows/git/releases/download/v2.7.0.windows.1/Git-2.7.0-32-bit.exe"
-$git_url64 = "https://github.com/git-for-windows/git/releases/download/v2.7.0.windows.1/Git-2.7.0-64-bit.exe"
 
 if($is_64bit) { $git_url = $git_url64 }
 
@@ -19,15 +17,6 @@ if (!(Test-Path "C:\Program Files\OpenSSH\bin\ssh.exe")) {
     # initially set the port to 2222 so that there is not a race
     # condition in which packer connects to SSH before we can disable the service
     Start-Process "C:\Windows\Temp\openssh.exe" "/S /port=2222 /privsep=1 /password=D@rj33l1ng" -NoNewWindow -Wait
-}
-
-if(!(Test-Path "pathto minwin")) {
-    Write-Output "Downloading $git_url"
-    (New-Object System.Net.WebClient).DownloadFile($git_url, "C:\Windows\Temp\gitinstall.exe")
-
-    Start-Process "c:\windows\temp\gitinstall.exe" '/SILENT /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh"' -NoNewWindow -Wait
-
-    &setx path "$($env:path);C:\Program Files\Git\bin" /m
 }
 
 Stop-Service "OpenSSHd" -Force
@@ -95,6 +84,8 @@ Write-Output "Configuring firewall"
 netsh advfirewall firewall add rule name="SSHD" dir=in action=allow service=OpenSSHd enable=yes
 netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="C:\Program Files\OpenSSH\usr\sbin\sshd.exe" enable=yes
 netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22
+
+Start-Sleep -Seconds 30
 
 if ($AutoStart -eq $true) {
     Start-Service "OpenSSHd"

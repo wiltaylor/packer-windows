@@ -11,23 +11,13 @@
 		"vm_name": "{{user `osnameshort`}}-base-vmware",
 		"communicator": "ssh",
 		"shutdown_command": "C:/Windows/System32/sysprep/sysprep.exe /quiet /generalize /shutdown /oobe /unattend:c:/windows/temp/sysprep.xml",
-		"shutdown_timeout": "15m",
+		"shutdown_timeout": "1h",
 		"ssh_username": "vagrant",
 		"ssh_password": "vagrant",
 		"ssh_wait_timeout": "8h",
 		"guest_os_type": "{{user `vmwareos`}}",
       "floppy_files": [
-        "./answerfiles/{{user `osnameshort`}}/autounattend.xml",
-        "./answerfiles/{{user `osnameshort`}}/sysprep.xml",
-        "./scripts/disableautoupdate.cmd",
-        "./scripts/hibernation.cmd",
-        "./scripts/openssh.ps1",
-        "./scripts/powershell.cmd",
-        "./scripts/rdp.cmd",
-        "./scripts/vagrantuser.cmd",
-        "./scripts/vmtools.cmd",
-        "./tools/upgrader.exe",
-        "./scripts/fixnetwork.ps1"
+        "./floppy/{{user `osnameshort`}}-vmware/"
 	  ],
 	  "vmx_data": {
 	  		"config.version": "8",
@@ -50,22 +40,14 @@
 		"vm_name": "{{user `osnameshort`}}-base-vbox",
 		"communicator": "ssh",
 		"shutdown_command": "C:/Windows/System32/sysprep/sysprep.exe /quiet /generalize /shutdown /oobe /unattend:c:/windows/temp/sysprep.xml",
-		"shutdown_timeout": "15m",
+		"shutdown_timeout": "1h",
 		"ssh_username": "vagrant",
 		"ssh_password": "vagrant",
 		"ssh_wait_timeout": "8h",
+		"guest_additions_mode": "disable",
 		"guest_os_type": "{{user `vboxos`}}",
       "floppy_files": [
-        "./answerfiles/{{user `osnameshort`}}/autounattend.xml",
-        "./answerfiles/{{user `osnameshort`}}/sysprep.xml",
-        "./scripts/disableautoupdate.cmd",
-        "./scripts/hibernation.cmd",
-        "./scripts/openssh.ps1",
-        "./scripts/powershell.cmd",
-        "./scripts/rdp.cmd",
-        "./scripts/vagrantuser.cmd",
-        "./scripts/fixnetwork.ps1",
-        "./scripts/vmtools.cmd"
+        "./floppy/{{user `osnameshort`}}-virtualbox/"
 	  ],
       "vboxmanage": [
         [

@@ -1,0 +1,242 @@
+param([switch]$ToolPhase, [switch]$SettingPhase, [switch]$SysPrep)
+
+#Vars
+$OSNAME = '<!OSNAME!>'
+$OSNAMELONG = '<!OSNAMELONG!>'
+$ISO = '<!ISO!>'
+$ISOMD5 = '<!ISOMD5!>'
+$VBOXOS = '<!VBOXOS!>'
+$VMWAREOS = '<!VMWAREOS!>'
+$ARCH = '<!ARCH!>'
+$COMPUTERNAME = '<!COMPUTERNAME!>'
+$HYPERVISOR = '<!HYPERVISOR!>'
+
+
+if($PSScriptRoot -eq $null) { $PSScriptRoot = Split-Path $MyInvocation.InvocationName }
+
+ . "$PSScriptRoot\helper.ps1"
+
+$ErrorActionPreference = "Stop"
+
+function Set-WinRMSettings {
+    #Setting all networks to private.
+    Write-LogMSG Info 'Setting all network interfaces as work interfaces.'
+    Start-Restartable -Times 5 -Delay 60 -CodeBlock {
+        $networkListManager = [Activator]::CreateInstance([Type]::GetTypeFromCLSID([Guid]'{DCB00C01-570F-4A9B-8D69-199FDBA5723B}'))
+        $connections = $networkListManager.GetNetworkConnections()
+        $connections | % { $_.GetNetwork().SetCategory(1) }
+    }
+
+    #Enable Remoting and configure WinRM
+    Write-LogMSG Info 'Setting up WINRM'   
+    try { Enable-PSRemoting -Force } catch {} #bug
+    Write-LogMSG Info 'Starting WinRM service'
+    Start-Service WinRm 
+    Write-LogMSG Info 'Waiting 60 seconds before config...'
+    Start-Sleep 60
+    Write-LogMSG Info 'Starting config'
+    Set-Item WSMAN:\localhost\client\TrustedHosts * -force
+    Set-Item WSMan:\localhost\Shell\MaxMemoryPerShellMB -Value 2048 -Force
+    Set-Item WSMan:\localhost\MaxTimeoutms -Value 1800000 -Force
+    Set-Item WSMan:\localhost\Service\AllowUnencrypted -Value $true -Force
+    Set-Item WSMan:\localhost\Service\Auth\Basic -Value $true -Force
+    set-item WSMan:\localhost\Listener\*\port -Value 5985 -Force
+
+    #Fix firewall
+    Write-LogMSG Info 'Setting up firewall'
+    Invoke-Exe -Exe 'c:\windows\system32\sc.exe' -ArgumentList 'config WinRM start= auto'
+    Invoke-Exe -Exe 'c:\windows\system32\netsh.exe' -ArgumentList 'advfirewall firewall set rule group="Windows Remote Management" new enable=yes'
+    Invoke-Exe -Exe 'c:\windows\system32\netsh.exe' -ArgumentList 'advfirewall firewall add rule name="winrm"  dir=in action=allow protocol=TCP localport=5985'
+    Invoke-Exe -Exe 'c:\windows\system32\netsh.exe' -ArgumentList 'advfirewall firewall add rule name="Open Port 3389" dir=in action=allow protocol=TCP localport=3389'
+}
+
+
+#
+# TOOL PHASE
+#
+try
+{
+    if($ToolPhase) {
+        Write-LogMSG Info 'Starting Tool Phase'
+
+        Write-LogMSG Info 'Copying scripts to temp'
+        Copy-Item 'a:\build.ps1' 'c:\windows\temp\build.ps1'
+        Copy-Item 'a:\helper.ps1' 'c:\windows\temp\helper.ps1'
+        Copy-Item 'a:\sysprep.xml' 'c:\windows\temp\sysprep.xml'
+
+        #Creating user account
+        Write-LogMSG Info 'Preventing password on vagrant account from expiring'
+        Invoke-Exe -Exe 'C:\windows\system32\wbem\wmic.exe' -ArgumentList "useraccount where name='vagrant' set PasswordExpires=FALSE"
+        Invoke-Exe -Exe 'c:\windows\system32\net.exe' -ArgumentList 'accounts /MAXPWAGE:UNLIMITED'
+    
+        #prevent auto logon.
+        Write-LogMSG Info 'Disabling auto logon'
+        if(-not(Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon')) {
+            New-Item 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Force | Out-Null
+        }
+        New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon -Value 0 -PropertyType DWORD -Force | Out-Null
+
+        #disable uac prompt on vagrant account.
+        Write-LogMSG Info 'Disabling UAC on vagrant account'
+        if(-not(Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System')) {
+            New-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -Force | Out-Null
+        }
+        New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -Name ConsentPromptBehaviorAdmin -Value 0 -PropertyType DWORD -Force | Out-Null
+
+        #setting up next phase
+        Write-LogMSG Info 'Registering next phase auto start task'
+        Register-Startup -User vagrant -Password vagrant -title 'BuildScript Phase 2' -Path 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-executionpolicy bypass -noninteractive -file a:\build.ps1 -SettingPhase'
+
+        if($HYPERVISOR -eq 'vmware') {
+            Write-LogMSG Info 'Hypervisor is VMware - Installing vmware tools'
+            Invoke-Exe -Exe 'a:\upgrader.exe' -ArgumentList '-p "/s /v\"/qr REBOOT=ReallySupress\""'
+        }
+
+        if($HYPERVISOR -eq 'virtualbox') {
+            Write-LogMSG Info 'Hypervisor is virtualbox - TBA '
+            #TBA
+        }
+
+        Write-LogMSG Info 'About to restart the computer. Waiting 120 seconds...'
+        Start-Sleep -Seconds 120 #Prevent any issues from rebooting to early.
+        Write-LogMSG Info 'Restarting now...'
+        Restart-Computer -Force
+    }
+
+    if($SettingPhase) {
+        Write-LogMSG Info 'Starting Setting Phase'
+
+        Write-LogMSG Info 'Disabling auto startup'
+        Unregister-Startup -title 'BuildScript Phase 2'
+
+        #Disabling auto update
+        Write-LogMSG Info 'Disabling AutoUpdate'
+        if(-not(Test-Path 'HKLM:\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update')) {
+            New-Item 'HKLM:\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update' -Force | Out-Null
+        }
+        New-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update' -Name AUOptions -Value 1 -PropertyType DWORD -Force | Out-Null
+        New-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update' -Name AUState -Value 7 -PropertyType DWORD -Force | Out-Null
+    
+        #Setting up network settings
+        Set-WinRMSettings
+
+        #Disable hibernation and other power settings.
+        Write-LogMSG Info 'Disabling Hibernation'
+        if(-not(Test-Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Power')){
+            New-Item 'HKLM:\SYSTEM\CurrentControlSet\Control\Power' -Force | Out-Null
+        }
+        New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Power' -Name HibernateEnabled -Value 0 -PropertyType DWORD -Force | Out-Null
+        New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Power' -Name HibernateFileSizePercent -Value 0 -PropertyType DWORD -Force | Out-Null
+
+        Write-LogMSG Info 'Setting Power Profile'
+        Start-Restartable -Times 5 -Delay 60 -CodeBlock { Invoke-Exe -Exe 'c:\windows\system32\powercfg.exe' -ArgumentList '-setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c' }
+
+        #Enable RDP
+        Write-LogMSG Info 'Enabling RDP'
+        if(-not(Test-Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server')){
+            New-Item 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Force | Out-Null
+        }
+        New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0 -PropertyType DWORD -Force | Out-Null
+    
+        Write-LogMSG Info 'Enabling powershell script execution'
+        Invoke-Exe -Exe 'C:\windows\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"'
+
+        if($ARCH -eq 'amd64'){
+            Invoke-Exe -Exe 'C:\windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList '-Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"'
+        }
+
+        #Patching process at this point.
+
+        #
+        ######################################################################################################################################################################
+        #
+    
+
+        #Installing SSH Service
+        Write-LogMSG Info 'Downloading and Installing SSH Service'
+        Install-WebPackage -URI 'http://www.mls-software.com/files/setupssh-7.1p1-1.exe' -Destination 'c:\windows\temp\ssh.exe' -Exe 'c:\windows\temp\ssh.exe' -ArgumentList '/S /port=2222 /privsep=1 /password=D@rj33l1ng'
+        
+        Write-LogMSG Info 'Stopping SSH Service'
+        Stop-Service 'OpenSSHd' -Force
+
+        Write-LogMSG Info 'Setting up ssh folders'
+        New-Item -ItemType Directory -Force -Path 'C:\Users\vagrant\.ssh'
+        Invoke-Exe -Exe 'C:\Windows\System32\icacls.exe' -ArgumentList '"C:\Users\vagrant" /grant "vagrant:(OI)(CI)F"'
+        Invoke-Exe -Exe 'C:\Windows\System32\icacls.exe' -ArgumentList '"C:\Program Files\OpenSSH\bin" /grant "vagrant:(OI)RX"'
+        Invoke-Exe -Exe 'C:\Windows\System32\icacls.exe' -ArgumentList '"C:\Program Files\OpenSSH\usr\sbin" /grant "vagrant:(OI)RX"'
+
+        Write-LogMSG Info 'Updating passwd file'
+        Start-Restartable -Times 5 -Delay 60 -CodeBlock { 
+            $file = Get-Content 'C:\Program Files\OpenSSH\etc\passwd' | Foreach-Object { $_ -replace '/home/(\w+)', '/cygdrive/c/Users/$1' } 
+            $file | Set-Content 'C:\Program Files\OpenSSH\etc\passwd' 
+        }
+
+        # Set shell to /bin/sh to return exit status
+        $passwd_file = Get-Content 'C:\Program Files\OpenSSH\etc\passwd'
+        $passwd_file = $passwd_file -replace '/bin/bash', '/bin/sh'
+        Start-Restartable -Times 5 -Delay 60 -CodeBlock { Set-Content 'C:\Program Files\OpenSSH\etc\passwd' $passwd_file }
+
+        # fix opensshd to not be strict
+        Write-LogMSG Info 'Updating sshd_config'
+        $sshd_config = Get-Content 'C:\Program Files\OpenSSH\etc\sshd_config'
+        $sshd_config = $sshd_config -replace 'StrictModes yes', 'StrictModes no'
+        $sshd_config = $sshd_config -replace '#PubkeyAuthentication yes', 'PubkeyAuthentication yes'
+        $sshd_config = $sshd_config -replace '#PermitUserEnvironment no', 'PermitUserEnvironment yes'
+        # disable the use of DNS to speed up the time it takes to establish a connection
+        $sshd_config = $sshd_config -replace '#UseDNS yes', 'UseDNS no'
+        # disable the login banner
+        $sshd_config = $sshd_config -replace 'Banner /etc/banner.txt', '#Banner /etc/banner.txt'
+        # next time OpenSSH starts have it listen on the proper port
+        $sshd_config = $sshd_config -replace 'Port 2222', 'Port 22'
+
+        Start-Restartable -Times 5 -Delay 60 -CodeBlock { Set-Content 'C:\Program Files\OpenSSH\etc\sshd_config' $sshd_config }      
+
+        #Remove ed25519 key because vagrant doesn't support it.
+        Write-LogMSG Info 'Removing ssh_host_ed25519_key'
+        Remove-Item -Force -ErrorAction SilentlyContinue 'C:\Program Files\OpenSSH\etc\ssh_host_ed25519_key'
+        Remove-Item -Force -ErrorAction SilentlyContinue 'C:\Program Files\OpenSSH\etc\ssh_host_ed25519_key.pub'
+        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue 'C:\Program Files\OpenSSH\tmp'
+
+        Write-LogMSG Info 'Linking openssh temp to windows temp'
+        Invoke-Exe -Exe 'C:\Program Files\OpenSSH\bin\junction.exe' -ArgumentList '/accepteula "C:\Program Files\OpenSSH\tmp" "C:\Windows\Temp"'
+        Invoke-Exe -Exe 'C:\Windows\System32\icacls.exe' -ArgumentList '"C:\Windows\Temp" /grant "vagrant:(OI)(CI)F"'
+
+        Write-LogMSG Info 'Setting ssh environment'
+        $sshenv = 'TEMP=C:\Windows\Temp'
+        if($ARCH -eq 'amd64'){
+            $env_vars = @('ProgramFiles(x86)=C:\Program Files (x86)',
+                'ProgramW6432=C:\Program Files',
+                'CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files',
+                'CommonProgramW6432=C:\Program Files\Common Files')
+            $sshenv = $sshenv + "`r`n" + ($env_vars -join "`r`n")
+        }
+
+        Start-Restartable -Times 5 -Delay 60 -CodeBlock { Set-Content C:\Users\vagrant\.ssh\environment $sshenv }
+
+        Write-LogMSG Info 'Storing vagrent key.'
+        Start-Restartable -Times 5 -Delay 60 -CodeBlock { Get-WebItem -URI 'https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub' -Destination 'C:\Users\vagrant\.ssh\authorized_keys' }
+        Set-Content C:\Windows\Temp\PATH ([byte[]][char[]] $env:PATH) -Encoding Byte
+
+        Write-LogMSG Info 'Setting firewall settings for ssh'
+        Invoke-Exe -Exe 'C:\windows\system32\netsh.exe' -ArgumentList 'advfirewall firewall add rule name="SSHD" dir=in action=allow service=OpenSSHd enable=yes'
+        Invoke-Exe -Exe 'C:\windows\system32\netsh.exe' -ArgumentList 'advfirewall firewall add rule name="SSHD" dir=in action=allow program="C:\Program Files\OpenSSH\usr\sbin\sshd.exe" enable=yes'
+        Invoke-Exe -Exe 'C:\windows\system32\netsh.exe' -ArgumentList 'advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22'
+
+        Write-LogMSG Info 'Waiting 30 seconds before starting service.'
+        Start-Sleep -Seconds 30
+        Write-LogMSG Info 'Starting service.'
+        Start-Service 'OpenSSHd'
+        Write-LogMSG Info 'All done exiting...'
+    }
+
+    if($SysPrep) {
+        Write-LogMSG Info 'Starting SysPrep phase'
+        #Set remoting back up again.
+        Set-WinRMSettings
+    }
+}
+catch
+{
+    Write-LogMSG Fatal "Script crashed Error: $_"
+    &C:\windows\notepad.exe c:\windows\temp\Build.log
+}
