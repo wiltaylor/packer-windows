@@ -18,13 +18,6 @@ Vagrant.configure("2") do |config|
 
     config.windows.set_work_network = true
 
-    config.vm.provision :hosts do |dns|
-        #Prevent VMs connecting to kms
-        dns.add_host '127.0.0.1', [
-            'kmssyd01', 'kmssyd01.aus.local', 'kmssyd01.aus'
-        ]
-    end
-
     config.vm.provider :vmware_workstation do |v, override|
         #v.gui = true
         v.vmx["memsize"] = "2048"

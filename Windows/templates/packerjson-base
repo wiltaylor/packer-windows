@@ -11,7 +11,7 @@
 		"vm_name": "{{user `osnameshort`}}-base-vmware",
 		"communicator": "ssh",
 		"shutdown_command": "C:/Windows/System32/sysprep/sysprep.exe /quiet /generalize /shutdown /oobe /unattend:c:/windows/temp/sysprep.xml",
-		"shutdown_timeout": "1h",
+		"shutdown_timeout": "15m",
 		"ssh_username": "vagrant",
 		"ssh_password": "vagrant",
 		"ssh_wait_timeout": "8h",

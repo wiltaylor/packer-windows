@@ -58,6 +58,13 @@ try
 {
     if($ToolPhase) {
         Write-LogMSG Info 'Starting Tool Phase'
+    
+        #Disabling proxy auto detect 
+        Write-LogMSG Info 'Disabling proxy auto detect'
+        if(-not(Test-Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings')) {
+            New-Item 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' -Force | Out-Null
+        }
+        New-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' -Name AutoDetect  -Value 0 -PropertyType DWORD -Force | Out-Null       
 
         Write-LogMSG Info 'Copying scripts to temp'
         Copy-Item 'a:\build.ps1' 'c:\windows\temp\build.ps1'
@@ -75,6 +82,14 @@ try
             New-Item 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Force | Out-Null
         }
         New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon -Value 0 -PropertyType DWORD -Force | Out-Null
+
+        #disable auto windows activation.
+        Write-LogMSG Info 'Disabling UAC on vagrant account'
+        if(-not(Test-Path 'HKLM:\SOFTWARE\Microsoft\WindowsNT\CurrentVersion \SoftwareProtectionPlatform\Activation')) {
+            New-Item 'HKLM:\SOFTWARE\Microsoft\WindowsNT\CurrentVersion \SoftwareProtectionPlatform\Activation' -Force | Out-Null
+        }
+        New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WindowsNT\CurrentVersion \SoftwareProtectionPlatform\Activation' -Name Manual -Value 1 -PropertyType DWORD -Force | Out-Null
+
 
         #disable uac prompt on vagrant account.
         Write-LogMSG Info 'Disabling UAC on vagrant account'
