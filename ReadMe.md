@@ -27,9 +27,12 @@ Before you can run this script you need to have the following prerequisites.
 * [Virtual Box](https://www.virtualbox.org/)
 
 After the above is installed you need one last thing. Which is upgrader.exe from vmware. To get this do the following:
-2. Create a new VM and use VMware’s easy install feature to create the vm for you but don’t start the vm.
-3. Extract the autoinst.flp file created by vmware with 7zip. Note: You will get an error when extracting. The file is still fine.
-4. Copy the upgrader.exe file to the Tools folder of this repository.
+
+1. Create a new VM and use VMware’s easy install feature to create the vm for you but don’t start the vm.
+2. Extract the autoinst.flp file created by vmware with 7zip. Note: You will get an error when extracting. The file is still fine.
+3. Create a Tools and an ISO folder inside the Windows directory in this repository.
+4. Copy the upgrader.exe file to the Tools folder of this repository created above.
+5. Copy your windows install iso files into the ISO folder. Look at the contents of pssake-build.ps1 file for the expected filenames of the iso files.
 
 ## Running the build script
 Simply run the following command from the Windows directory of the repository.
@@ -40,4 +43,4 @@ Once completed this will create all the boxes in the Windows directory. You can 
 
 ## Credit
 I would like to thank Joe Fitzgerald who created the original Windows packer configurations which helped me build these ones.
-[https://github.com/joefitzgerald/packer-windows](https://github.com/joefitzgerald/packer-windows)
+[github.com/joefitzgerald/packer-windows](https://github.com/joefitzgerald/packer-windows)
